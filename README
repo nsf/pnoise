@@ -1,0 +1,7 @@
+Perlin noise benchmark.
+
+Runs perlin noise 256x256 image generation 100 times.
+
+Currently the frontend is just a bunch of shell scripts to compile/run compiled
+versions of it. You'll have to run scripted versions manually with the
+interpreter of your choice.
