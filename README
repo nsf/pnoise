@@ -5,3 +5,72 @@ Runs perlin noise 256x256 image generation 100 times.
 Currently the frontend is just a bunch of shell scripts to compile/run compiled
 versions of it. You'll have to run scripted versions manually with the
 interpreter of your choice.
+
+Example output of the run on my machine (intel i5-3470, 64 bit) and the versions I use:
+
+clang version 3.4 (tags/RELEASE_34/final)
+gcc (GCC) 4.8.2 20131219 (prerelease)
+Mono C# compiler version 3.2.3.0
+Mono JIT compiler version 3.2.3 (tarball Sun Sep 22 20:38:43 UTC 2013)
+DMD64 D Compiler v2.064
+LDC - the LLVM D compiler (0.12.1):
+  based on DMD v2.063.2 and LLVM 3.3
+gdc (GCC) 4.8.2 20130725 (prerelease)
+go version devel +b1edf8faa5d6 Wed Nov 13 21:29:34 2013 -0500 linux/amd64
+gccgo (GCC) 4.8.2 20131219 (prerelease)
+rustc 0.9
+
+
+=== clang -O3:
+
+real    0m0.144s
+user    0m0.143s
+sys     0m0.000s
+
+=== gcc -O3:
+
+real    0m0.090s
+user    0m0.087s
+sys     0m0.000s
+
+=== mono C#:
+
+real    0m1.445s
+user    0m1.430s
+sys     0m0.013s
+
+=== D (dmd):
+
+real    0m0.682s
+user    0m0.680s
+sys     0m0.000s
+
+=== D (ldc2):
+
+real    0m0.416s
+user    0m0.413s
+sys     0m0.000s
+
+=== D (gdc):
+
+real    0m0.528s
+user    0m0.527s
+sys     0m0.000s
+
+=== Go gc:
+
+real    0m0.383s
+user    0m0.380s
+sys     0m0.003s
+
+=== Go gccgo -O3:
+
+real    0m0.236s
+user    0m0.230s
+sys     0m0.007s
+
+=== Rust:
+
+real    0m0.085s
+user    0m0.083s
+sys     0m0.000s
