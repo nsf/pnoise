@@ -108,9 +108,9 @@ fn main() {
         for y in range(0, 256) {
             for x in range(0, 256) {
                 let v = n2d.get(
-                    x as f32 * 0.1f32,
-                    y as f32 * 0.1f32
-                ) * 0.5f32 + 0.5f32;
+                    x as f32 * 0.1,
+                    y as f32 * 0.1
+                ) * 0.5 + 0.5;
                 pixels[y*256+x] = v;
             };
         };
@@ -118,7 +118,7 @@ fn main() {
 
     for y in range(0, 256) {
         for x in range(0, 256) {
-            print!("{}", symbols[(pixels[y*256+x] / 0.2f32) as int]);
+            print!("{}", symbols[(pixels[y*256+x] / 0.2) as int]);
         }
         println!("");
     }
