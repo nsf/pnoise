@@ -1,20 +1,22 @@
 #!/bin/bash
 
 echo -e "=== clang -O3:"
-time ./bin_test_c_clang > /dev/null
+perf stat -r 10 ./bin_test_c_clang 2>&1 > /dev/null | grep time
 echo -e "\n=== gcc -O3:"
-time ./bin_test_c_gcc > /dev/null
+perf stat -r 10 ./bin_test_c_gcc 2>&1 > /dev/null | grep time
 echo -e "\n=== mono C#:"
-time ./bin_test_cs > /dev/null
+perf stat -r 10 ./bin_test_cs 2>&1 > /dev/null | grep time
 echo -e "\n=== D (dmd):"
-time ./bin_test_d_dmd > /dev/null
+perf stat -r 10 ./bin_test_d_dmd 2>&1 > /dev/null | grep time
 echo -e "\n=== D (ldc2):"
-time ./bin_test_d_ldc > /dev/null
+perf stat -r 10 ./bin_test_d_ldc 2>&1 > /dev/null | grep time
 echo -e "\n=== D (gdc):"
-time ./bin_test_d_gdc > /dev/null
+perf stat -r 10 ./bin_test_d_gdc 2>&1 > /dev/null | grep time
 echo -e "\n=== Go gc:"
-time ./bin_test_go_gc > /dev/null
+perf stat -r 10 ./bin_test_go_gc 2>&1 > /dev/null | grep time
 echo -e "\n=== Go gccgo -O3:"
-time ./bin_test_go_gccgo > /dev/null
+perf stat -r 10 ./bin_test_go_gccgo 2>&1 > /dev/null | grep time
 echo -e "\n=== Rust:"
-time ./bin_test_rs > /dev/null
+perf stat -r 10 ./bin_test_rs 2>&1 >/dev/null | grep time
+echo -e "\n=== Nimrod:"
+perf stat -r 10 ./bin_test_nim 2>&1 > /dev/null | grep time

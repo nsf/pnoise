@@ -18,59 +18,35 @@ LDC - the LLVM D compiler (0.12.1):
 gdc (GCC) 4.8.2 20130725 (prerelease)
 go version devel +b1edf8faa5d6 Wed Nov 13 21:29:34 2013 -0500 linux/amd64
 gccgo (GCC) 4.8.2 20131219 (prerelease)
-rustc 0.9
-
+rustc 0.10-pre (58eeb07 2014-02-12 14:51:48 -0800)
+Nimrod Compiler Version 0.9.3 (2014-02-13) [Linux: amd64]
 
 === clang -O3:
-
-real    0m0.144s
-user    0m0.143s
-sys     0m0.000s
+       0,146465818 seconds time elapsed
 
 === gcc -O3:
-
-real    0m0.090s
-user    0m0.087s
-sys     0m0.000s
+       0,089261372 seconds time elapsed
 
 === mono C#:
-
-real    0m1.445s
-user    0m1.430s
-sys     0m0.013s
+       1,399760970 seconds time elapsed
 
 === D (dmd):
-
-real    0m0.682s
-user    0m0.680s
-sys     0m0.000s
+       0,678052687 seconds time elapsed
 
 === D (ldc2):
-
-real    0m0.416s
-user    0m0.413s
-sys     0m0.000s
+       0,412727921 seconds time elapsed
 
 === D (gdc):
-
-real    0m0.528s
-user    0m0.527s
-sys     0m0.000s
+       0,524699646 seconds time elapsed
 
 === Go gc:
-
-real    0m0.383s
-user    0m0.380s
-sys     0m0.003s
+       0,377252744 seconds time elapsed
 
 === Go gccgo -O3:
-
-real    0m0.236s
-user    0m0.230s
-sys     0m0.007s
+       0,234906274 seconds time elapsed
 
 === Rust:
+       0,084882443 seconds time elapsed
 
-real    0m0.085s
-user    0m0.083s
-sys     0m0.000s
+=== Nimrod:
+       0,145893382 seconds time elapsed

@@ -8,3 +8,4 @@ gccgo -O3 -g -o bin_test_go_gccgo test.go
 go build -o bin_test_go_gc test.go
 rustc --opt-level 3 -o bin_test_rs test.rs
 mcs -out:bin_test_cs test.cs
+nimrod c -d:release --passC:-std=c99 --passC:-Ofast --passC:-march=native --passC:-msse3 --passC:-mfpmath=sse -o:bin_test_nim test.nim
