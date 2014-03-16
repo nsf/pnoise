@@ -20,3 +20,5 @@ echo -e "\n=== Rust:"
 perf stat -r 10 ./bin_test_rs 2>&1 >/dev/null | grep time
 echo -e "\n=== Nimrod:"
 perf stat -r 10 ./bin_test_nim 2>&1 > /dev/null | grep time
+echo -e "\n=== Crystal:"
+perf stat -r 10 ./bin_test_cr 2>&1 > /dev/null | grep time
