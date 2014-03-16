@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -rf *.o bin_* nimcache
+rm -rf *.o bin_* nimcache .crystal
