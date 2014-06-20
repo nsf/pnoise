@@ -6,12 +6,12 @@ struct Vec2 {
 	float x, y;
 }
 
-float lerp(float a, float b, float v)
+float lerp(float a, float b, float v) pure @safe
 {
 	return a * (1 - v) + b * v;
 }
 
-float smooth(float v)
+float smooth(float v) pure @safe
 {
 	return v * v * (3 - 2 * v);
 }
@@ -22,26 +22,26 @@ Vec2 random_gradient(Random)(ref Random r)
 	return Vec2(cos(v), sin(v));
 }
 
-float gradient(Vec2 orig, Vec2 grad, Vec2 p)
+float gradient(Vec2 orig, Vec2 grad, Vec2 p) pure @safe
 {
 	auto sp = Vec2(p.x - orig.x, p.y - orig.y);
 	return grad.x * sp.x + grad.y * sp.y;
 }
 
-class Noise2DContext {
+final class Noise2DContext {
 	Vec2[256] rgradients;
 	uint[256] permutations;
 	Vec2[4] gradients;
 	Vec2[4] origins;
 
 private:
-	Vec2 get_gradient(int x, int y)
+	final Vec2 get_gradient(int x, int y)
 	{
 		auto idx = permutations[x & 255] + permutations[y & 255];
 		return rgradients[idx & 255];
 	}
 
-	void get_gradients(float x, float y)
+	final void get_gradients(float x, float y) pure @safe
 	{
 		float x0f = floor(x);
 		float y0f = floor(y);
@@ -75,7 +75,7 @@ public:
 		}
 	}
 
-	float get(float x, float y)
+	final float get(float x, float y)
 	{
 		auto p = Vec2(x, y);
 
