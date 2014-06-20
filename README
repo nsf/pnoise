@@ -12,10 +12,10 @@ clang version 3.4 (tags/RELEASE_34/final)
 gcc (GCC) 4.8.2 20131219 (prerelease)
 Mono C# compiler version 3.2.3.0
 Mono JIT compiler version 3.2.3 (tarball Sun Sep 22 20:38:43 UTC 2013)
-DMD64 D Compiler v2.064
+DMD64 D Compiler v2.065
 LDC - the LLVM D compiler (0.12.1):
   based on DMD v2.063.2 and LLVM 3.3
-gdc (GCC) 4.8.2 20130725 (prerelease)
+gdc (GCC) 4.9.0
 go version devel +b1edf8faa5d6 Wed Nov 13 21:29:34 2013 -0500 linux/amd64
 gccgo (GCC) 4.8.2 20131219 (prerelease)
 rustc 0.10-pre (58eeb07 2014-02-12 14:51:48 -0800)
@@ -31,13 +31,13 @@ Nimrod Compiler Version 0.9.3 (2014-02-13) [Linux: amd64]
        1,399760970 seconds time elapsed
 
 === D (dmd):
-       0,678052687 seconds time elapsed
+       0,681784552 seconds time elapsed
 
 === D (ldc2):
-       0,412727921 seconds time elapsed
+       0,356668311 seconds time elapsed
 
 === D (gdc):
-       0,524699646 seconds time elapsed
+       0,521092138 seconds time elapsed
 
 === Go gc:
        0,377252744 seconds time elapsed
