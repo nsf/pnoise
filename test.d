@@ -6,12 +6,12 @@ struct Vec2 {
 	float x, y;
 }
 
-float lerp(float a, float b, float v)
+float lerp(float a, float b, float v) pure @safe nothrow
 {
 	return a * (1 - v) + b * v;
 }
 
-float smooth(float v)
+float smooth(float v) pure @safe nothrow
 {
 	return v * v * (3 - 2 * v);
 }
@@ -22,26 +22,26 @@ Vec2 random_gradient(Random)(ref Random r)
 	return Vec2(cos(v), sin(v));
 }
 
-float gradient(Vec2 orig, Vec2 grad, Vec2 p)
+float gradient(Vec2 orig, Vec2 grad, Vec2 p) pure @safe nothrow
 {
 	auto sp = Vec2(p.x - orig.x, p.y - orig.y);
 	return grad.x * sp.x + grad.y * sp.y;
 }
 
-class Noise2DContext {
+struct Noise2DContext {
 	Vec2[256] rgradients;
 	uint[256] permutations;
 	Vec2[4] gradients;
 	Vec2[4] origins;
 
 private:
-	Vec2 get_gradient(int x, int y)
+	Vec2 get_gradient(int x, int y) pure @safe nothrow
 	{
 		auto idx = permutations[x & 255] + permutations[y & 255];
 		return rgradients[idx & 255];
 	}
 
-	void get_gradients(float x, float y)
+	void get_gradients(float x, float y) @safe nothrow
 	{
 		float x0f = floor(x);
 		float y0f = floor(y);
@@ -62,20 +62,23 @@ private:
 	}
 
 public:
-	this(uint seed)
+	static Noise2DContext opCall(uint seed)
 	{
+		Noise2DContext ret;
 		auto rnd = Random(seed);
-		foreach (ref elem; rgradients)
+		foreach (ref elem; ret.rgradients)
 			elem = random_gradient(rnd);
 
-		foreach (i; 0 .. permutations.length) {
+		foreach (i; 0 .. ret.permutations.length) {
 			uint j = uniform(0, cast(uint)i+1, rnd);
-			permutations[i] = permutations[j];
-			permutations[j] = cast(uint)i;
+			ret.permutations[i] = ret.permutations[j];
+			ret.permutations[j] = cast(uint)i;
 		}
+
+		return ret;
 	}
 
-	float get(float x, float y)
+	float get(float x, float y) @safe nothrow
 	{
 		auto p = Vec2(x, y);
 
@@ -99,7 +102,7 @@ void main()
 	immutable symbols = [" ", "░", "▒", "▓", "█", "█"];
 	auto pixels = new float[256*256];
 
-	auto n2d = new Noise2DContext(0);
+	auto n2d = Noise2DContext(0);
 	foreach (i; 0..100) {
 		foreach (y; 0..256) {
 			foreach (x; 0..256) {
