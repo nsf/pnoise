@@ -8,45 +8,45 @@ interpreter of your choice.
 
 Example output of the run on my machine (intel i5-3470, 64 bit) and the versions I use:
 
-clang version 3.4 (tags/RELEASE_34/final)
-gcc (GCC) 4.8.2 20131219 (prerelease)
-Mono C# compiler version 3.2.3.0
-Mono JIT compiler version 3.2.3 (tarball Sun Sep 22 20:38:43 UTC 2013)
+clang version 3.4.2 (tags/RELEASE_34/dot2-final)
+gcc (GCC) 4.9.0 20140604 (prerelease)
+Mono C# compiler version 3.4.0.0
+Mono JIT compiler version 3.4.0 (tarball Wed Jun 25 20:39:03 UTC 2014)
 DMD64 D Compiler v2.065
-LDC - the LLVM D compiler (0.12.1):
-  based on DMD v2.063.2 and LLVM 3.3
+LDC - the LLVM D compiler (0.13.0):
+  based on DMD v2.064 and LLVM 3.4.2
 gdc (GCC) 4.9.0
-go version devel +b1edf8faa5d6 Wed Nov 13 21:29:34 2013 -0500 linux/amd64
-gccgo (GCC) 4.8.2 20131219 (prerelease)
-rustc 0.10-pre (58eeb07 2014-02-12 14:51:48 -0800)
+go version go1.3 linux/amd64
+gccgo (GCC) 4.9.0 20140604 (prerelease)
+rustc 0.11.0
 Nimrod Compiler Version 0.9.3 (2014-02-13) [Linux: amd64]
 
 === clang -O3:
-       0,146465818 seconds time elapsed
+       0,146721295 seconds time elapsed
 
 === gcc -O3:
-       0,089261372 seconds time elapsed
+       0,075836647 seconds time elapsed
 
 === mono C#:
-       1,399760970 seconds time elapsed
+       1,447746788 seconds time elapsed
 
 === D (dmd):
-       0,681784552 seconds time elapsed
+       0,674948999 seconds time elapsed
 
 === D (ldc2):
-       0,356668311 seconds time elapsed
+       0,336780366 seconds time elapsed
 
 === D (gdc):
-       0,521092138 seconds time elapsed
+       0,520143658 seconds time elapsed
 
 === Go gc:
-       0,377252744 seconds time elapsed
+       0,368691982 seconds time elapsed
 
 === Go gccgo -O3:
-       0,234906274 seconds time elapsed
+       0,333691880 seconds time elapsed
 
 === Rust:
-       0,084882443 seconds time elapsed
+       0,079532143 seconds time elapsed
 
 === Nimrod:
-       0,145893382 seconds time elapsed
+       0,107750953 seconds time elapsed
