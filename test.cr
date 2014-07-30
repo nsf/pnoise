@@ -1,11 +1,4 @@
-struct Vec2
-  ZERO = Vec2.new(0.0, 0.0)
-
-  def initialize(@x, @y)
-  end
-  getter :x
-  getter :y
-end
+make_named_tuple Vec2, [x, y]
 
 def lerp(a, b, v)
   a * (1.0 - v) + b * v
@@ -25,12 +18,10 @@ def gradient(orig, grad, p)
   grad.x * sp.x + grad.y * sp.y
 end
 
-class Noise2DContext
+struct Noise2DContext
   def initialize
-    @rgradients = Array.new(256) { random_gradient }
-    @permutations = (0...256).to_a.shuffle!
-    @origins = {Vec2::ZERO, Vec2::ZERO, Vec2::ZERO, Vec2::ZERO}
-    @gradients = {Vec2::ZERO, Vec2::ZERO, Vec2::ZERO, Vec2::ZERO}
+    @rgradients = StaticArray(Vec2, 256).new { random_gradient }
+    @permutations = StaticArray(Int32, 256).new { |i | i }.shuffle!
   end
 
   def get_gradient(x, y)
@@ -46,37 +37,38 @@ class Noise2DContext
     x1 = x0 + 1
     y1 = y0 + 1
 
-    @gradients = {
-      get_gradient(x0, y0),
-      get_gradient(x1, y0),
-      get_gradient(x0, y1),
-      get_gradient(x1, y1),
-    }
-
-    @origins = {
-      Vec2.new(x0f + 0.0, y0f + 0.0),
-      Vec2.new(x0f + 1.0, y0f + 0.0),
-      Vec2.new(x0f + 0.0, y0f + 1.0),
-      Vec2.new(x0f + 1.0, y0f + 1.0),
+    {
+      {
+        get_gradient(x0, y0),
+        get_gradient(x1, y0),
+        get_gradient(x0, y1),
+        get_gradient(x1, y1),
+      },
+      {
+        Vec2.new(x0f + 0.0, y0f + 0.0),
+        Vec2.new(x0f + 1.0, y0f + 0.0),
+        Vec2.new(x0f + 0.0, y0f + 1.0),
+        Vec2.new(x0f + 1.0, y0f + 1.0),
+      }
     }
   end
 
   def get(x, y)
     p = Vec2.new(x, y)
-    get_gradients(x, y)
-    v0 = gradient(@origins[0], @gradients[0], p)
-    v1 = gradient(@origins[1], @gradients[1], p)
-    v2 = gradient(@origins[2], @gradients[2], p)
-    v3 = gradient(@origins[3], @gradients[3], p)
-    fx = smooth(x - @origins[0].x)
+    gradients, origins = get_gradients(x, y)
+    v0 = gradient(origins[0], gradients[0], p)
+    v1 = gradient(origins[1], gradients[1], p)
+    v2 = gradient(origins[2], gradients[2], p)
+    v3 = gradient(origins[3], gradients[3], p)
+    fx = smooth(x - origins[0].x)
     vx0 = lerp(v0, v1, fx)
     vx1 = lerp(v2, v3, fx)
-    fy = smooth(y - @origins[0].y)
+    fy = smooth(y - origins[0].y)
     lerp(vx0, vx1, fy)
   end
 end
 
-symbols = [" ", "░", "▒", "▓", "█", "█"]
+symbols = [' ', '░', '▒', '▓', '█', '█']
 pixels = Array.new(256) { Array.new(256, 0.0) }
 
 n2d = Noise2DContext.new
