@@ -1,7 +1,6 @@
 import std.stdio;
 import std.random;
 import std.math;
-import std.typecons;
 
 struct Vec2 {
 	float x, y;
