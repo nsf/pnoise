@@ -6,47 +6,49 @@ struct Vec2 {
 	float x, y;
 }
 
-float lerp(float a, float b, float v) pure @safe nothrow
+alias floor = core.stdc.math.floor;
+
+static float lerp(immutable float a, immutable float b, immutable float v) pure @trusted nothrow
 {
 	return a * (1 - v) + b * v;
 }
 
-float smooth(float v) pure @safe nothrow
+static float smooth(immutable float v) pure @trusted nothrow
 {
 	return v * v * (3 - 2 * v);
 }
 
-Vec2 random_gradient(Random)(ref Random r)
+static Vec2 random_gradient(Random)(ref Random r)
 {
-	auto v = uniform(0.0f, cast(float)PI * 2.0f, r);
+	immutable v = uniform(0.0f, cast(float)PI * 2.0f, r);
 	return Vec2(cos(v), sin(v));
 }
 
-float gradient(Vec2 orig, Vec2 grad, Vec2 p) pure @safe nothrow
+static float gradient(immutable Vec2 orig, immutable Vec2 grad, immutable Vec2 p) pure @trusted nothrow
 {
-	auto sp = Vec2(p.x - orig.x, p.y - orig.y);
+	immutable sp = Vec2(p.x - orig.x, p.y - orig.y);
 	return grad.x * sp.x + grad.y * sp.y;
 }
 
-struct Noise2DContext {
+struct Noise2DContext {	
 	Vec2[256] rgradients;
 	uint[256] permutations;
 	Vec2[4] gradients;
 	Vec2[4] origins;
 
 private:
-	Vec2 get_gradient(int x, int y) pure @safe nothrow
+	Vec2 get_gradient(immutable int x, immutable int y) pure @trusted nothrow
 	{
-		auto idx = permutations[x & 255] + permutations[y & 255];
+		immutable idx = permutations[x & 255] + permutations[y & 255];
 		return rgradients[idx & 255];
 	}
 
-	void get_gradients(float x, float y) @safe nothrow
+	void get_gradients(immutable float x, immutable float y) @trusted nothrow
 	{
 		float x0f = floor(x);
 		float y0f = floor(y);
-		int x0 = cast(int)x0f;
-		int y0 = cast(int)y0f;
+		int x0 = cast(int)x;
+		int y0 = cast(int)y;
 		int x1 = x0 + 1;
 		int y1 = y0 + 1;
 
@@ -78,20 +80,20 @@ public:
 		return ret;
 	}
 
-	float get(float x, float y) @safe nothrow
+	float get(immutable float x, immutable float y) @trusted nothrow
 	{
-		auto p = Vec2(x, y);
+		immutable p = Vec2(x, y);
 
 		get_gradients(x, y);
-		auto v0 = gradient(origins[0], gradients[0], p);
-		auto v1 = gradient(origins[1], gradients[1], p);
-		auto v2 = gradient(origins[2], gradients[2], p);
-		auto v3 = gradient(origins[3], gradients[3], p);
+		immutable v0 = gradient(origins[0], gradients[0], p);
+		immutable v1 = gradient(origins[1], gradients[1], p);
+		immutable v2 = gradient(origins[2], gradients[2], p);
+		immutable v3 = gradient(origins[3], gradients[3], p);
 
-		auto fx = smooth(x - origins[0].x);
-		auto vx0 = lerp(v0, v1, fx);
-		auto vx1 = lerp(v2, v3, fx);
-		auto fy = smooth(y - origins[0].y);
+		immutable fx = smooth(x - origins[0].x);
+		immutable vx0 = lerp(v0, v1, fx);
+		immutable vx1 = lerp(v2, v3, fx);
+		immutable fy = smooth(y - origins[0].y);
 		return lerp(vx0, vx1, fy);
 	}
 }
@@ -99,22 +101,24 @@ public:
 
 void main()
 {
+	core.memory.GC.disable();
+
 	immutable symbols = [" ", "░", "▒", "▓", "█", "█"];
 	auto pixels = new float[256*256];
 
 	auto n2d = Noise2DContext(0);
-	foreach (i; 0..100) {
-		foreach (y; 0..256) {
-			foreach (x; 0..256) {
-				auto v = n2d.get(x * 0.1f, y * 0.1f) *
+	foreach (immutable i; 0..100) {
+		foreach (immutable y; 0..256) {
+			foreach (immutable x; 0..256) {
+				immutable v = n2d.get(x * 0.1f, y * 0.1f) *
 					0.5f + 0.5f;
 				pixels[y*256+x] = v;
 			}
 		}
 	}
 
-	foreach (y; 0..256) {
-		foreach (x; 0..256) {
+	foreach (immutable y; 0..256) {
+		foreach (immutable x; 0..256) {
 			write(symbols[cast(int)(pixels[y*256+x] / 0.2f)]);
 		}
 		writeln();
