@@ -1,6 +1,7 @@
 import std.stdio;
 import std.random;
 import std.math;
+import std.typecons;
 
 struct Vec2 {
 	float x, y;
@@ -33,8 +34,6 @@ static float gradient(immutable Vec2 orig, immutable Vec2 grad, immutable Vec2 p
 struct Noise2DContext {	
 	Vec2[256] rgradients;
 	uint[256] permutations;
-	Vec2[4] gradients;
-	Vec2[4] origins;
 
 private:
 	Vec2 get_gradient(immutable int x, immutable int y) pure @trusted nothrow
@@ -43,7 +42,7 @@ private:
 		return rgradients[idx & 255];
 	}
 
-	void get_gradients(immutable float x, immutable float y) @trusted nothrow
+	Vec2[8] get_gradients(immutable float x, immutable float y) @trusted nothrow
 	{
 		float x0f = floor(x);
 		float y0f = floor(y);
@@ -52,15 +51,14 @@ private:
 		int x1 = x0 + 1;
 		int y1 = y0 + 1;
 
-		gradients[0] = get_gradient(x0, y0);
-		gradients[1] = get_gradient(x1, y0);
-		gradients[2] = get_gradient(x0, y1);
-		gradients[3] = get_gradient(x1, y1);
-
-		origins[0] = Vec2(x0f + 0.0f, y0f + 0.0f);
-		origins[1] = Vec2(x0f + 1.0f, y0f + 0.0f);
-		origins[2] = Vec2(x0f + 0.0f, y0f + 1.0f);
-		origins[3] = Vec2(x0f + 1.0f, y0f + 1.0f);
+		return cast(Vec2[8]) [get_gradient(x0, y0),
+		get_gradient(x1, y0),
+		get_gradient(x0, y1),
+		get_gradient(x1, y1),
+		Vec2(x0f + 0.0f, y0f + 0.0f),
+		Vec2(x0f + 1.0f, y0f + 0.0f),
+		Vec2(x0f + 0.0f, y0f + 1.0f),
+		Vec2(x0f + 1.0f, y0f + 1.0f)];
 	}
 
 public:
@@ -84,20 +82,19 @@ public:
 	{
 		immutable p = Vec2(x, y);
 
-		get_gradients(x, y);
-		immutable v0 = gradient(origins[0], gradients[0], p);
-		immutable v1 = gradient(origins[1], gradients[1], p);
-		immutable v2 = gradient(origins[2], gradients[2], p);
-		immutable v3 = gradient(origins[3], gradients[3], p);
+		immutable vecs = get_gradients(x, y);
+		immutable v0 = gradient(vecs[4], vecs[0], p);
+		immutable v1 = gradient(vecs[5], vecs[1], p);
+		immutable v2 = gradient(vecs[6], vecs[2], p);
+		immutable v3 = gradient(vecs[7], vecs[3], p);
 
-		immutable fx = smooth(x - origins[0].x);
+		immutable fx = smooth(x - vecs[4].x);
 		immutable vx0 = lerp(v0, v1, fx);
 		immutable vx1 = lerp(v2, v3, fx);
-		immutable fy = smooth(y - origins[0].y);
+		immutable fy = smooth(y - vecs[4].y);
 		return lerp(vx0, vx1, fy);
 	}
 }
-
 
 void main()
 {
