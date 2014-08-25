@@ -97,8 +97,6 @@ public:
 
 void main()
 {
-	core.memory.GC.disable();
-
 	immutable symbols = [" ", "░", "▒", "▓", "█", "█"];
 	auto pixels = new float[256*256];
 
