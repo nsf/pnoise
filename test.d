@@ -8,12 +8,12 @@ struct Vec2 {
 
 alias floor = core.stdc.math.floor;
 
-static float lerp(immutable float a, immutable float b, immutable float v) pure @trusted nothrow
+static float lerp(immutable float a, immutable float b, immutable float v) pure nothrow
 {
 	return a * (1 - v) + b * v;
 }
 
-static float smooth(immutable float v) pure @trusted nothrow
+static float smooth(immutable float v) pure nothrow
 {
 	return v * v * (3 - 2 * v);
 }
@@ -24,7 +24,7 @@ static Vec2 random_gradient(Random)(ref Random r)
 	return Vec2(cos(v), sin(v));
 }
 
-static float gradient(immutable Vec2 orig, immutable Vec2 grad, immutable Vec2 p) pure @trusted nothrow
+static float gradient(immutable Vec2 orig, immutable Vec2 grad, immutable Vec2 p) pure nothrow
 {
 	immutable sp = Vec2(p.x - orig.x, p.y - orig.y);
 	return grad.x * sp.x + grad.y * sp.y;
@@ -35,13 +35,13 @@ struct Noise2DContext {
 	uint[256] permutations;
 
 private:
-	Vec2 get_gradient(immutable int x, immutable int y) pure @trusted nothrow
+	Vec2 get_gradient(immutable int x, immutable int y) pure nothrow
 	{
 		immutable idx = permutations[x & 255] + permutations[y & 255];
 		return rgradients[idx & 255];
 	}
 
-	Vec2[8] get_gradients(immutable float x, immutable float y) @trusted nothrow
+	Vec2[8] get_gradients(immutable float x, immutable float y) nothrow
 	{
 		float x0f = floor(x);
 		float y0f = floor(y);
@@ -77,7 +77,7 @@ public:
 		return ret;
 	}
 
-	float get(immutable float x, immutable float y) @trusted nothrow
+	float get(immutable float x, immutable float y) nothrow
 	{
 		immutable p = Vec2(x, y);
 
