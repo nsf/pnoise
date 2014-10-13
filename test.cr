@@ -1,4 +1,4 @@
-make_named_tuple Vec2, [x, y]
+record Vec2, x, y
 
 def lerp(a, b, v)
   a * (1.0 - v) + b * v
