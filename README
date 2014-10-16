@@ -20,6 +20,7 @@ go version go1.3 linux/amd64
 gccgo (GCC) 4.9.1
 rustc 0.11.0
 Nimrod Compiler Version 0.9.3 (2014-02-13) [Linux: amd64]
+Crystal 0.5.1 (Чт окт 16 23:32:41 UTC 2014)
 
 === clang -O3:
        0,148892439 seconds time elapsed
@@ -50,3 +51,6 @@ Nimrod Compiler Version 0.9.3 (2014-02-13) [Linux: amd64]
 
 === Nimrod:
        0,107013192 seconds time elapsed
+
+=== Crystal:
+       0,078514174 seconds time elapsed
