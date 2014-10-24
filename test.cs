@@ -25,8 +25,7 @@ class Noise2DContext {
 	}
 
 	internal static float gradient(Vec2 orig, Vec2 grad, Vec2 p) {
-		var sp = new Vec2 { x = p.x - orig.x, y = p.y - orig.y };
-		return grad.x * sp.x + grad.y * sp.y;
+		return grad.x * (p.x - orig.x) + grad.y * (p.y - orig.y);
 	}
 
 	public Noise2DContext(int seed) {
@@ -64,10 +63,14 @@ class Noise2DContext {
 		gradients[2] = get_gradient(x0, y1);
 		gradients[3] = get_gradient(x1, y1);
 
-		origins[0] = new Vec2 { x = x0f + 0, y = y0f + 0 };
-		origins[1] = new Vec2 { x = x0f + 1, y = y0f + 0 };
-		origins[2] = new Vec2 { x = x0f + 0, y = y0f + 1 };
-		origins[3] = new Vec2 { x = x0f + 1, y = y0f + 1 };
+		origins[0].x = x0f + 0;
+		origins[0].y = y0f + 0;
+		origins[1].x = x0f + 1;
+		origins[1].y = y0f + 0;
+		origins[2].x = x0f + 0;
+		origins[2].y = y0f + 1;
+		origins[3].x = x0f + 1;
+		origins[3].y = y0f + 1;
 	}
 
 	public float get(float x, float y) {

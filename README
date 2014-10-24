@@ -10,8 +10,8 @@ Example output of the run on my machine (intel i5-3470, 64 bit) and the versions
 
 clang version 3.4.2 (tags/RELEASE_34/dot2-final)
 gcc (GCC) 4.9.1
-Mono C# compiler version 3.4.0.0
-Mono JIT compiler version 3.4.0 (tarball Wed Jun 25 20:39:03 UTC 2014)
+Mono C# compiler version 3.10.0.0
+Mono JIT compiler version 3.10.0 (tarball Mon Oct  6 20:46:04 UTC 2014)
 DMD64 D Compiler v2.066
 LDC - the LLVM D compiler (0.14.0):
   based on DMD v2.065 and LLVM 3.4.2
@@ -32,7 +32,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
        0,080241344 seconds time elapsed
 
 === mono C#:
-       1,450376452 seconds time elapsed
+       1,049515240 seconds time elapsed
 
 === D (dmd):
        0,345792408 seconds time elapsed
