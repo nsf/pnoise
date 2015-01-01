@@ -10,8 +10,9 @@ type
         x, y: float
 
     TNoise2DContext = object
-        rgradients, gradients, origins: array[0.. 255, TVec2]
+        rgradients: array[0.. 255, TVec2]
         permutations: array[0.. 255, int]
+        gradients, origins: array[0.. 4, TVec2]
 
 
 # Procedures
