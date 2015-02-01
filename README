@@ -8,55 +8,58 @@ interpreter of your choice.
 
 Example output of the run on my machine (intel i5-3470, 64 bit) and the versions I use:
 
-clang version 3.4.2 (tags/RELEASE_34/dot2-final)
-gcc (GCC) 4.9.1
-Mono C# compiler version 3.10.0.0
-Mono JIT compiler version 3.10.0 (tarball Mon Oct  6 20:46:04 UTC 2014)
+clang version 3.5.1 (tags/RELEASE_351/final)
+gcc (GCC) 4.9.2 20141224 (prerelease)
+Mono C# compiler version 3.12.0.0
+Mono JIT compiler version 3.12.0 (tarball Thu Jan 15 18:46:56 UTC 2015)
 DMD64 D Compiler v2.066
-LDC - the LLVM D compiler (0.14.0):
-  based on DMD v2.065 and LLVM 3.4.2
-gdc (GCC) 4.9.1
-go version go1.3 linux/amd64
-gccgo (GCC) 4.9.1
-rustc 0.11.0
-Nimrod Compiler Version 0.9.3 (2014-02-13) [Linux: amd64]
+LDC - the LLVM D compiler (0.15.1):
+  based on DMD v2.066.1 and LLVM 3.5.0
+gdc (GCC) 4.9.2
+go version go1.4.1 linux/amd64
+gccgo (GCC) 4.9.2 20141224 (prerelease)
+rustc 0.13.0-nightly (c46812f65 2014-10-19 00:47:18 +0000)
+Nim Compiler Version 0.10.3 (2015-01-04) [Linux: amd64]
 Crystal 0.5.1 (Чт окт 16 23:32:41 UTC 2014)
 java version "1.7.0_40"
 Java(TM) SE Runtime Environment (build 1.7.0_40-b43)
 Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
 
 === clang -O3:
-       0,148892439 seconds time elapsed
+       0,143604111 seconds time elapsed
 
 === gcc -O3:
-       0,080241344 seconds time elapsed
+       0,076729664 seconds time elapsed
 
 === mono C#:
-       1,049515240 seconds time elapsed
+       1,052041381 seconds time elapsed
 
 === D (dmd):
-       0,345792408 seconds time elapsed
+       0,345694275 seconds time elapsed
 
 === D (ldc2):
-       0,080969771 seconds time elapsed
+       0,102913484 seconds time elapsed
 
 === D (gdc):
-       0,069958640 seconds time elapsed
+       0,070089722 seconds time elapsed
 
 === Go gc:
-       0,379534953 seconds time elapsed
+       0,360201714 seconds time elapsed
 
 === Go gccgo -O3:
-       0,332014892 seconds time elapsed
+       0,309625279 seconds time elapsed
 
 === Rust:
-       0,079199179 seconds time elapsed
+       0,078053001 seconds time elapsed
 
-=== Nimrod:
-       0,107013192 seconds time elapsed
+=== Nim (gcc):
+       0,159299532 seconds time elapsed
+
+=== Nim (clang):
+       0,077463342 seconds time elapsed
 
 === Crystal:
-       0,078514174 seconds time elapsed
+       0,084717540 seconds time elapsed
 
 === Java:
-       0,595638504 seconds time elapsed
+       0,597987438 seconds time elapsed
