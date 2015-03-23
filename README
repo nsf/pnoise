@@ -35,13 +35,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
        1,052041381 seconds time elapsed
 
 === D (dmd):
-       0,345694275 seconds time elapsed
+       0,339820165 seconds time elapsed
 
 === D (ldc2):
-       0,102913484 seconds time elapsed
+       0,096995053 seconds time elapsed
 
 === D (gdc):
-       0,070089722 seconds time elapsed
+       0,066999680 seconds time elapsed
 
 === Go gc:
        0,360201714 seconds time elapsed
