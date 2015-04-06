@@ -10,5 +10,5 @@ rustc --opt-level 3 -o bin_test_rs test.rs
 mcs -out:bin_test_cs test.cs
 nim c -d:release --cc:gcc -o:bin_test_nim_gcc test.nim
 nim c -d:release --cc:clang -o:bin_test_nim_clang test.nim
-crystal -o bin_test_cr --release test.cr
+crystal build -o bin_test_cr --release test.cr
 javac test.java

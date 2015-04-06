@@ -20,7 +20,7 @@ go version go1.4.1 linux/amd64
 gccgo (GCC) 4.9.2 20141224 (prerelease)
 rustc 0.13.0-nightly (c46812f65 2014-10-19 00:47:18 +0000)
 Nim Compiler Version 0.10.3 (2015-01-04) [Linux: amd64]
-Crystal 0.5.1 (Чт окт 16 23:32:41 UTC 2014)
+Crystal 0.6.1 (Пн апр  6 03:19:27 UTC 2015)
 java version "1.7.0_40"
 Java(TM) SE Runtime Environment (build 1.7.0_40-b43)
 Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
@@ -59,7 +59,8 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
        0,077463342 seconds time elapsed
 
 === Crystal:
-       0,084717540 seconds time elapsed
+       0,077063864 seconds time elapsed
+
 
 === Java:
        0,597987438 seconds time elapsed
