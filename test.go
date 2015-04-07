@@ -36,8 +36,8 @@ func gradient(orig, grad, p Vec2) float32 {
 }
 
 type Noise2DContext struct {
-	rgradients []Vec2
-	permutations []int
+	rgradients [256]Vec2
+	permutations [256]int
 	gradients [4]Vec2
 	origins [4]Vec2
 }
@@ -46,8 +46,7 @@ func NewNoise2DContext(seed int) *Noise2DContext {
 	rnd := rand.New(rand.NewSource(int64(seed)))
 
 	n2d := new(Noise2DContext)
-	n2d.rgradients = make([]Vec2, 256)
-	n2d.permutations = rand.Perm(256)
+	copy(n2d.permutations[:], rand.Perm(256))
 	for i := range n2d.rgradients {
 		n2d.rgradients[i] = random_gradient(rnd)
 	}
