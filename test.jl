@@ -42,9 +42,7 @@ function gradient(orig::Vec2,grad::Vec2,p::Vec2)
 end
 
 function get_gradient(ctx::Noise2DContext, x::Int64, y::Int64)
-  #println("get_gradient: x: $x, y: $y")
   idx = ctx.permutations[x&255+1] + ctx.permutations[y&255+1]
-  #println("idx is: $idx")
   ctx.rgradients[idx&255+1]
 end
 
