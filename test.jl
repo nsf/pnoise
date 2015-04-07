@@ -111,5 +111,4 @@ function main()
    end
 end
 
-main()
 @time main()
