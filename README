@@ -18,7 +18,7 @@ LDC - the LLVM D compiler (0.15.1):
 gdc (GCC) 4.9.2
 go version go1.4.1 linux/amd64
 gccgo (GCC) 4.9.2 20150304 (prerelease)
-rustc 0.13.0-nightly (c46812f65 2014-10-19 00:47:18 +0000)
+rustc 1.0.0-dev (built 2015-05-17)
 Nim Compiler Version 0.10.3 (2015-01-04) [Linux: amd64]
 Crystal 0.7.1 (Пн май 11 00:47:29 UTC 2015)
 java version "1.7.0_40"
@@ -50,7 +50,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
        0,187825846 seconds time elapsed
 
 === Rust:
-       0,078053001 seconds time elapsed
+       0,079955081 seconds time elapsed
 
 === Nim (gcc):
        0,159299532 seconds time elapsed

@@ -10,10 +10,14 @@
 
 // Multi-language Perlin noise benchmark.
 // See https://github.com/nsf/pnoise for timings and alternative implementations.
+// ignore-lexer-test FIXME #15679
+
+#![feature(rand)]
 
 use std::f32::consts::PI;
-use std::rand::{Rng, StdRng};
+use std::__rand::{Rng, thread_rng};
 
+#[derive(Copy, Clone)]
 struct Vec2 {
     x: f32,
     y: f32,
@@ -24,7 +28,7 @@ fn lerp(a: f32, b: f32, v: f32) -> f32 { a * (1.0 - v) + b * v }
 fn smooth(v: f32) -> f32 { v * v * (3.0 - 2.0 * v) }
 
 fn random_gradient<R: Rng>(r: &mut R) -> Vec2 {
-    let v = PI * 2.0 * r.gen();
+    let v = PI * 2.0 * r.gen::<f32>();
     Vec2 { x: v.cos(), y: v.sin() }
 }
 
@@ -33,35 +37,35 @@ fn gradient(orig: Vec2, grad: Vec2, p: Vec2) -> f32 {
 }
 
 struct Noise2DContext {
-    rgradients: [Vec2, ..256],
-    permutations: [i32, ..256],
+    rgradients: [Vec2; 256],
+    permutations: [i32; 256],
 }
 
 impl Noise2DContext {
     fn new() -> Noise2DContext {
-        let mut rng = StdRng::new().unwrap();
+        let mut rng = thread_rng();
 
-        let mut rgradients = [Vec2 { x: 0.0, y: 0.0 }, ..256];
-        for x in rgradients.mut_iter() {
+        let mut rgradients = [Vec2 { x: 0.0, y: 0.0 }; 256];
+        for x in &mut rgradients[..] {
             *x = random_gradient(&mut rng);
         }
 
-        let mut permutations = [0i32, ..256];
-        for (i, x) in permutations.mut_iter().enumerate() {
+        let mut permutations = [0; 256];
+        for (i, x) in permutations.iter_mut().enumerate() {
             *x = i as i32;
         }
-        rng.shuffle(permutations);
+        rng.shuffle(&mut permutations);
 
         Noise2DContext { rgradients: rgradients, permutations: permutations }
     }
 
     fn get_gradient(&self, x: i32, y: i32) -> Vec2 {
-        let idx = self.permutations[(x & 255) as uint] +
-                    self.permutations[(y & 255) as uint];
-        self.rgradients[(idx & 255) as uint]
+        let idx = self.permutations[(x & 255) as usize] +
+                    self.permutations[(y & 255) as usize];
+        self.rgradients[(idx & 255) as usize]
     }
 
-    fn get_gradients(&self, x: f32, y: f32) -> ([Vec2, ..4], [Vec2, ..4]) {
+    fn get_gradients(&self, x: f32, y: f32) -> ([Vec2; 4], [Vec2; 4]) {
         let x0f = x.floor();
         let y0f = y.floor();
         let x1f = x0f + 1.0;
@@ -98,22 +102,22 @@ impl Noise2DContext {
 
 fn main() {
     let symbols = [' ', '░', '▒', '▓', '█', '█'];
-    let mut pixels = [0f32, ..256*256];
+    let mut pixels = [0f32; 256*256];
     let n2d = Noise2DContext::new();
 
-    for _ in range(0u, 100) {
-        for y in range(0u, 256) {
-            for x in range(0u, 256) {
+    for _ in 0..100 {
+        for y in 0..256 {
+            for x in 0..256 {
                 let v = n2d.get(x as f32 * 0.1, y as f32 * 0.1);
                 pixels[y*256+x] = v * 0.5 + 0.5;
             }
         }
     }
 
-    for y in range(0u, 256) {
-        for x in range(0u, 256) {
-            let idx = (pixels[y*256+x] / 0.2) as uint;
-            print!("{:c}", symbols[idx]);
+    for y in 0..256 {
+        for x in 0..256 {
+            let idx = (pixels[y*256+x] / 0.2) as usize;
+            print!("{}", symbols[idx]);
         }
         print!("\n");
     }
