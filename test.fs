@@ -10,15 +10,15 @@ let inline lerp a b v = a * (1.0f - v) + b * v
 let inline smooth v = v * v * (3.0f - 2.0f * v)
 let inline gradient (o : Vec2) (g : Vec2) (p : Vec2) = g.X * (p.X - o.X) + g.Y * (p.Y - o.Y)
 
-let random_gradient (rnd : Random) = 
+let random_gradient (rnd : Random) =
     let v = rnd.NextDouble() * Math.PI * 2.0
-    new Vec2(single (Math.Cos v), single (Math.Sin v))
+    Vec2(single (Math.Cos v), single (Math.Sin v))
 
 // is there a better way to ignore function argument?
 let random_vectors n (rnd : Random) = Array.init n (fun _ -> random_gradient rnd)
 
 // is there a better way to generate permutations?
-let random_permutations n (rnd : Random) = 
+let random_permutations n (rnd : Random) =
     let perm = Array.init n id
     for i = 0 to n - 1 do
         let j = rnd.Next(i + 1)
@@ -26,18 +26,18 @@ let random_permutations n (rnd : Random) =
         perm.[j] <- i
     perm
 
-type Noise2DContext(seed) = 
+type Noise2DContext(seed) =
     let rgradients, permutations =
         let rnd = new Random(seed)
         (random_vectors 256 rnd, random_permutations 256 rnd)
-    
+
     let gradients = Array.zeroCreate<Vec2> 4
     let origins = Array.zeroCreate<Vec2> 4
-    
+
     member inline private this.get_gradient x y =
         let idx = permutations.[x &&& 255] + permutations.[y &&& 255]
         rgradients.[idx &&& 255]
-    
+
     member inline private this.get_gradients_and_origins x y =
         let x0f = single (Math.Floor(double x))
         let y0f = single (Math.Floor(double y))
@@ -49,13 +49,13 @@ type Noise2DContext(seed) =
         gradients.[1] <- this.get_gradient x1 y0
         gradients.[2] <- this.get_gradient x0 y1
         gradients.[3] <- this.get_gradient x1 y1
-        origins.[0] <- new Vec2(x0f + 0.0f, y0f + 0.0f)
-        origins.[1] <- new Vec2(x0f + 1.0f, y0f + 0.0f)
-        origins.[2] <- new Vec2(x0f + 0.0f, y0f + 1.0f)
-        origins.[3] <- new Vec2(x0f + 1.0f, y0f + 1.0f)
-    
+        origins.[0] <- Vec2(x0f + 0.0f, y0f + 0.0f)
+        origins.[1] <- Vec2(x0f + 1.0f, y0f + 0.0f)
+        origins.[2] <- Vec2(x0f + 0.0f, y0f + 1.0f)
+        origins.[3] <- Vec2(x0f + 1.0f, y0f + 1.0f)
+
     member this.Get (x : single) (y : single) =
-        let p = new Vec2(x, y)
+        let p = Vec2(x, y)
         this.get_gradients_and_origins x y
         let v0 = gradient origins.[0] gradients.[0] p
         let v1 = gradient origins.[1] gradients.[1] p
