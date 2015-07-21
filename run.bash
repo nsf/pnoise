@@ -6,6 +6,8 @@ echo -e "\n=== gcc -O3:"
 perf stat -r 10 ./bin_test_c_gcc 2>&1 > /dev/null | grep time
 echo -e "\n=== mono C#:"
 perf stat -r 10 mono -O=float32 bin_test_cs 2>&1 > /dev/null | grep time
+echo -e "\n=== mono F#:"
+perf stat -r 10 mono -O=float32 bin_test_fs.exe 2>&1 > /dev/null | grep time
 echo -e "\n=== D (dmd):"
 perf stat -r 10 ./bin_test_d_dmd 2>&1 > /dev/null | grep time
 echo -e "\n=== D (ldc2):"

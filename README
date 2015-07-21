@@ -12,6 +12,7 @@ clang version 3.6.0 (tags/RELEASE_360/final)
 gcc (GCC) 4.9.2 20150304 (prerelease)
 Mono C# compiler version 4.0.1.0
 Mono JIT compiler version 4.0.1 (tarball Tue May 19 20:07:41 UTC 2015)
+F# Compiler for F# 3.1 (Open Source Edition)
 DMD64 D Compiler v2.067
 LDC - the LLVM D compiler (0.15.1):
   based on DMD v2.066.1 and LLVM 3.5.1
@@ -33,6 +34,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
 
 === mono C#:
        0,606408625 seconds time elapsed
+
+=== mono F#:
+       1,955821135 seconds time elapsed
 
 === D (dmd):
        0,346574283 seconds time elapsed

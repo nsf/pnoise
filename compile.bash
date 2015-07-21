@@ -8,6 +8,7 @@ gccgo -O3 -g -o bin_test_go_gccgo test.go
 go build -o bin_test_go_gc test.go
 rustc -O -o bin_test_rs test.rs
 mcs -out:bin_test_cs test.cs
+fsharpc -o bin_test_fs.exe -O test.fs
 nim c -d:release --cc:gcc -o:bin_test_nim_gcc test.nim
 nim c -d:release --cc:clang -o:bin_test_nim_clang test.nim
 crystal build -o bin_test_cr --release test.cr
