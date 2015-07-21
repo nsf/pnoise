@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 struct Vec2 {
 	public float x;
@@ -11,10 +12,12 @@ class Noise2DContext {
 	Vec2[] gradients;
 	Vec2[] origins;
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	internal static float lerp(float a, float b, float v) {
 		return a * (1 - v) + b * v;
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	internal static float smooth(float v) {
 		return v * v * (3 - 2 * v);
 	}
@@ -24,6 +27,7 @@ class Noise2DContext {
 		return new Vec2 { x = (float)Math.Cos(v), y = (float)Math.Sin(v) };
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	internal static float gradient(Vec2 orig, Vec2 grad, Vec2 p) {
 		return grad.x * (p.x - orig.x) + grad.y * (p.y - orig.y);
 	}
@@ -45,11 +49,13 @@ class Noise2DContext {
 		origins = new Vec2[4];
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	internal Vec2 get_gradient(int x, int y) {
 		int idx = permutations[x & 255] + permutations[y & 255];
 		return rgradients[idx & 255];
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	internal void get_gradients(float x, float y) {
 		float x0f = (float)Math.Floor(x);
 		float y0f = (float)Math.Floor(y);
