@@ -1,25 +1,25 @@
 ﻿open System
 
-type Vec2 = 
-    { X : single
-      Y : single }
+type Vec2 = struct
+    val X : single
+    val Y : single
+    new(x, y) = { X = x; Y = y }
+end
 
 let lerp a b v = a * (1.0f - v) + b * v
 let smooth v = v * v * (3.0f - 2.0f * v)
-let gradient o g p = g.X * (p.X - o.X) + g.Y * (p.Y - o.Y)
+let gradient (o : Vec2) (g : Vec2) (p : Vec2) = g.X * (p.X - o.X) + g.Y * (p.Y - o.Y)
 
 let random_gradient (rnd : Random) = 
     let v = rnd.NextDouble() * Math.PI * 2.0
-    { X = single (Math.Cos v)
-      Y = single (Math.Sin v) }
+    new Vec2(single (Math.Cos v), single (Math.Sin v))
 
 // is there a better way to ignore function argument?
 let random_vectors n (rnd : Random) = Array.init n (fun _ -> random_gradient rnd)
 
 // is there a better way to generate permutations?
 let random_permutations n (rnd : Random) = 
-    // is there a pass-through function?
-    let perm = Array.init n (fun x -> x)
+    let perm = Array.init n id
     for i = 0 to n - 1 do
         let j = rnd.Next(i + 1)
         perm.[i] <- perm.[j]
@@ -50,19 +50,13 @@ type Noise2DContext(seed) =
         gradients.[1] <- this.get_gradient x1 y0
         gradients.[2] <- this.get_gradient x0 y1
         gradients.[3] <- this.get_gradient x1 y1
-        origins.[0] <- { X = x0f + 0.0f
-                         Y = y0f + 0.0f }
-        origins.[1] <- { X = x0f + 1.0f
-                         Y = y0f + 0.0f }
-        origins.[2] <- { X = x0f + 0.0f
-                         Y = y0f + 1.0f }
-        origins.[3] <- { X = x0f + 1.0f
-                         Y = y0f + 1.0f }
+        origins.[0] <- new Vec2(x0f + 0.0f, y0f + 0.0f)
+        origins.[1] <- new Vec2(x0f + 1.0f, y0f + 0.0f)
+        origins.[2] <- new Vec2(x0f + 0.0f, y0f + 1.0f)
+        origins.[3] <- new Vec2(x0f + 1.0f, y0f + 1.0f)
     
     member this.Get x y = 
-        let p = 
-            { X = x
-              Y = y }
+        let p = new Vec2(x, y)
         this.get_gradients_and_origins x y
         let v0 = gradient origins.[0] gradients.[0] p
         let v1 = gradient origins.[1] gradients.[1] p
