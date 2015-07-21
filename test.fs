@@ -34,11 +34,11 @@ type Noise2DContext(seed) =
     let gradients = Array.zeroCreate<Vec2> 4
     let origins = Array.zeroCreate<Vec2> 4
     
-    member private this.get_gradient x y =
+    member inline private this.get_gradient x y =
         let idx = permutations.[x &&& 255] + permutations.[y &&& 255]
         rgradients.[idx &&& 255]
     
-    member private this.get_gradients_and_origins x y =
+    member inline private this.get_gradients_and_origins x y =
         let x0f = single (Math.Floor(double x))
         let y0f = single (Math.Floor(double y))
         let x0 = int x0f
