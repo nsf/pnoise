@@ -1,3 +1,8 @@
+-- This version uses ffi structs capability offered by luajit and shows that
+-- using them leads to near C performance in some cases. Despite the name
+-- "ffi", there is no C code involved. But in a way it's interesting that JIT
+-- compilers may offer such functionality.
+
 local ffi = require("ffi")
 ffi.cdef [[
 	typedef struct { float x, y; } vec3;
