@@ -17,7 +17,7 @@ DMD64 D Compiler v2.067
 LDC - the LLVM D compiler (0.15.1):
   based on DMD v2.066.1 and LLVM 3.5.1
 gdc (GCC) 4.9.2
-go version go1.4.2 linux/amd64
+go version go1.7.1 linux/amd64
 gccgo (GCC) 4.9.2 20150304 (prerelease)
 rustc 1.0.0-dev (built 2015-05-17)
 Nim Compiler Version 0.11.2 (2015-05-05) [Linux: amd64]
@@ -48,7 +48,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
        0,067106168 seconds time elapsed
 
 === Go gc:
-       0,354122239 seconds time elapsed
+       0,287522697 seconds time elapsed
 
 === Go gccgo -O3:
        0,176843422 seconds time elapsed
