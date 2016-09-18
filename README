@@ -8,50 +8,50 @@ interpreter of your choice.
 
 Example output of the run on my machine (intel i5-3470, 64 bit) and the versions I use:
 
-clang version 3.6.0 (tags/RELEASE_360/final)
-gcc (GCC) 4.9.2 20150304 (prerelease)
-Mono C# compiler version 4.0.1.0
-Mono JIT compiler version 4.0.1 (tarball Tue May 19 20:07:41 UTC 2015)
-F# Compiler for F# 3.1 (Open Source Edition)
-DMD64 D Compiler v2.067
+clang version 3.8.1 (tags/RELEASE_381/final)
+gcc (GCC) 6.1.1 20160802
+Mono C# compiler version 4.4.1.0
+Mono JIT compiler version 4.4.1 (Nightly 4.4.1.0/4747417 Thu Jul 14 18:06:32 UTC 2016)
+F# Compiler for F# 4.0 (Open Source Edition)
+DMD64 D Compiler v2.071.1
 LDC - the LLVM D compiler (0.15.1):
   based on DMD v2.066.1 and LLVM 3.5.1
-gdc (GCC) 4.9.2
+gdc (GCC) 6.1.1 20160501
 go version go1.7.1 linux/amd64
-gccgo (GCC) 4.9.2 20150304 (prerelease)
+gccgo (GCC) 6.1.1 20160802
 rustc 1.0.0-dev (built 2015-05-17)
 Nim Compiler Version 0.11.2 (2015-05-05) [Linux: amd64]
 Crystal 0.7.1 (Пн май 11 00:47:29 UTC 2015)
-java version "1.7.0_40"
-Java(TM) SE Runtime Environment (build 1.7.0_40-b43)
-Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
+java version "1.8.0_66"
+Java(TM) SE Runtime Environment (build 1.8.0_66-b17)
+Java HotSpot(TM) 64-Bit Server VM (build 25.66-b17, mixed mode)
 
 === clang -O3:
-       0,156677472 seconds time elapsed
+       0,162385900 seconds time elapsed
 
 === gcc -O3:
-       0,075984163 seconds time elapsed
+       0,089993071 seconds time elapsed
 
 === mono C#:
-       0,549332570 seconds time elapsed
+       0,520457137 seconds time elapsed
 
 === mono F#:
-       0,574667450 seconds time elapsed
+       0,553722808 seconds time elapsed
 
 === D (dmd):
-       0,346574283 seconds time elapsed
+       0,314917796 seconds time elapsed
 
 === D (ldc2):
        0,100076327 seconds time elapsed
 
 === D (gdc):
-       0,067106168 seconds time elapsed
+       0,076248784 seconds time elapsed
 
 === Go gc:
        0,287522697 seconds time elapsed
 
 === Go gccgo -O3:
-       0,176843422 seconds time elapsed
+       0,259701515 seconds time elapsed
 
 === Rust:
        0,074902613 seconds time elapsed
@@ -66,4 +66,4 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
        0,071615525 seconds time elapsed
 
 === Java:
-       0,603974271 seconds time elapsed
+       0,473815480 seconds time elapsed

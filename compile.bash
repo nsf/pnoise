@@ -1,5 +1,5 @@
 #!/bin/bash
-gcc -std=c99 -march=native -msse3 -mfpmath=sse -O3 -o bin_test_c_gcc test.c -lm
+gcc -std=c99 -msse3 -mfpmath=sse -O3 -o bin_test_c_gcc test.c -lm
 clang -std=c99 -march=native -msse3 -mfpmath=sse -O3 -o bin_test_c_clang test.c -lm
 dmd -ofbin_test_d_dmd -O -boundscheck=off -inline -release test.d
 ldc2 -O -ofbin_test_d_ldc test.d -release -mcpu=native -inline -boundscheck=off
